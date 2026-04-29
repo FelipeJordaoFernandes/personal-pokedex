@@ -264,14 +264,19 @@
   transform: none;
 }
 
-.fetch-message {
+.form-message {
   margin-top: -0.35rem;
   font-size: 0.92rem;
   text-align: left;
 }
 
-.fetch-message {
+.form-message--error {
   color: var(--accent-strong);
+  font-weight: 600;
+}
+
+.form-message--success {
+  color: #2f7a43;
   font-weight: 600;
 }
 
