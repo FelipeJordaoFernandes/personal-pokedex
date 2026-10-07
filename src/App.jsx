@@ -4,12 +4,10 @@ import BrandMark from "./components/BrandMark.jsx";
 import PokemonForm from "./components/PokemonForm/PokemonForm.jsx";
 import SearchBar from "./components/SearchBar/SearchBar.jsx";
 import PokemonCard from "./components/PokemonCard/PokemonCard.jsx";
-import { useTheme } from "./hooks/useTheme.js";
 import { usePokemonCollection } from "./hooks/usePokemonCollection.js";
 import "./App.css";
 
 export default function App() {
-  const { theme, toggleTheme } = useTheme();
   const {
     pokemonList,
     filteredPokemon,
@@ -42,7 +40,7 @@ export default function App() {
       <a className="skip-link" href="#collection-title">
         Pular para a coleção
       </a>
-      <Header theme={theme} onToggleTheme={toggleTheme} />
+      <Header />
       <main id="main-content">
         <section className="hero" aria-labelledby="page-title">
           <div>

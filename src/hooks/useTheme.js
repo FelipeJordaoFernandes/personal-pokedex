@@ -26,7 +26,12 @@ export function useTheme() {
   }, [theme]);
   return {
     theme: hydrated ? theme : "light",
-    toggleTheme: () =>
-      setTheme((current) => (current === "light" ? "dark" : "light")),
+    toggleTheme: () => {
+      const root = document.documentElement;
+      const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+      // The palette and prepared icon change together, in the click handler.
+      root.dataset.theme = nextTheme;
+      setTheme(nextTheme);
+    },
   };
 }

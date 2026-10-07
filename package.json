@@ -11,6 +11,7 @@
     "test": "node --test",
     "audit:lighthouse": "node scripts/audit-lighthouse.mjs",
     "audit:ui": "node scripts/audit-ui.mjs",
+    "audit:toggle": "node scripts/audit-toggle.mjs",
     "audit:live": "node scripts/audit-live.mjs",
     "assets:brand": "node scripts/generate-brand-assets.mjs"
   },
