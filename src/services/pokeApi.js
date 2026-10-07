@@ -13,7 +13,9 @@ export function formatPokemonName(name) {
 }
 
 export async function fetchPokemonByNumber(number) {
-  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${number}`);
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${number}`, {
+    signal: AbortSignal.timeout(10000),
+  });
 
   if (!response.ok) {
     throw new Error("Pokémon não encontrado.");

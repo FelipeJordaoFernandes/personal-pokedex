@@ -1,33 +1,22 @@
 import lunatoneIcon from "../../assets/lunatone.png";
 import solrockIcon from "../../assets/solrock.png";
-
-function ThemeToggle({ theme, onToggleTheme }) {
+export default function ThemeToggle({ theme, onToggleTheme }) {
   return (
     <button
       type="button"
       className="theme-toggle"
       onClick={onToggleTheme}
-      aria-label={`Ativar tema ${theme === "light" ? "dark" : "light"}`}
-      title={`Trocar para tema ${theme === "light" ? "dark" : "light"}`}
-      aria-pressed={theme === "dark"}
+      aria-label={`Tema: ${theme === "dark" ? "Escuro" : "Claro"}. Ativar tema ${theme === "light" ? "escuro" : "claro"}`}
+      title={`Ativar tema ${theme === "light" ? "escuro" : "claro"}`}
     >
-      <span className={`theme-toggle-thumb theme-toggle-thumb--${theme}`} />
       <img
-        src={solrockIcon}
+        src={theme === "dark" ? lunatoneIcon : solrockIcon}
         alt=""
-        className={`theme-toggle-image theme-toggle-image--solrock ${
-          theme === "light" ? "is-active" : ""
-        }`}
+        width="28"
+        height="28"
+        className="theme-toggle-image"
       />
-      <img
-        src={lunatoneIcon}
-        alt=""
-        className={`theme-toggle-image theme-toggle-image--lunatone ${
-          theme === "dark" ? "is-active" : ""
-        }`}
-      />
+      <span>{theme === "dark" ? "Escuro" : "Claro"}</span>
     </button>
   );
 }
-
-export default ThemeToggle;

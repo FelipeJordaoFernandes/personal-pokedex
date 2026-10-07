@@ -1,81 +1,80 @@
-import { useEffect, useState } from "react";
-
-const STORAGE_KEY = "pokedex-go-collection";
+import { useState } from "react";
+import { useHydrated } from "./useHydrated.js";
+import { readCollection, STORAGE_KEY } from "../services/collectionStorage.js";
 
 function getInitialCollection() {
-  const storedCollection = localStorage.getItem(STORAGE_KEY);
-
-  if (!storedCollection) {
-    return [];
-  }
-
+  if (typeof window === "undefined")
+    return { list: [], message: "", writable: true };
+  // Accessing window.localStorage itself may throw when browser storage is blocked.
   try {
-    return JSON.parse(storedCollection);
+    return readCollection(window.localStorage);
   } catch {
-    return [];
+    return readCollection({
+      getItem() {
+        throw new Error("Armazenamento indisponível");
+      },
+    });
   }
 }
 
 export function usePokemonCollection() {
+  const hydrated = useHydrated();
+  const [initial] = useState(getInitialCollection);
+  const [pokemonList, setPokemonList] = useState(initial.list);
+  const [storageMessage, setStorageMessage] = useState(initial.message);
   const [search, setSearch] = useState("");
-  const [pokemonList, setPokemonList] = useState(getInitialCollection);
-
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(pokemonList));
-  }, [pokemonList]);
-
-  const filteredPokemon = pokemonList.filter((pokemon) => {
-    const normalizedSearch = search.trim().toLowerCase();
-
-    if (!normalizedSearch) {
-      return true;
-    }
-
-    return (
-      pokemon.name.toLowerCase().includes(normalizedSearch) ||
+  const normalizedSearch = search.trim().toLocaleLowerCase("pt-BR");
+  const visibleList = hydrated ? pokemonList : [];
+  const filteredPokemon = visibleList.filter(
+    (pokemon) =>
+      !normalizedSearch ||
+      pokemon.name.toLocaleLowerCase("pt-BR").includes(normalizedSearch) ||
       String(pokemon.number).includes(normalizedSearch) ||
       pokemon.types.some((type) =>
-        type.toLowerCase().includes(normalizedSearch),
-      )
-    );
-  });
+        type.toLocaleLowerCase("pt-BR").includes(normalizedSearch),
+      ),
+  );
 
-  function addPokemon(pokemonData) {
-    const alreadyExists = pokemonList.some(
-      (pokemon) => pokemon.number === pokemonData.number,
-    );
-
-    if (alreadyExists) {
-      return { ok: false };
+  function updateCollection(nextList) {
+    setPokemonList(nextList);
+    if (!initial.writable) return;
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(nextList));
+    } catch {
+      setStorageMessage(
+        "O navegador não conseguiu salvar a coleção. Suas alterações ficam apenas nesta sessão.",
+      );
     }
-
-    const newPokemon = {
-      id: crypto.randomUUID(),
-      ...pokemonData,
-      createdAt: new Date().toISOString(),
-    };
-
-    setPokemonList((currentList) =>
-      [...currentList, newPokemon].sort((firstPokemon, secondPokemon) => {
-        return firstPokemon.number - secondPokemon.number;
-      }),
+  }
+  function addPokemon(data) {
+    if (pokemonList.some((pokemon) => Number(pokemon.number) === data.number)) {
+      return {
+        ok: false,
+        message: "Esse número da Pokédex já foi registrado.",
+      };
+    }
+    updateCollection(
+      [
+        ...pokemonList,
+        {
+          ...data,
+          id: crypto.randomUUID(),
+          createdAt: new Date().toISOString(),
+        },
+      ].sort((a, b) => Number(a.number) - Number(b.number)),
     );
-
     return { ok: true };
   }
-
-  function removePokemon(pokemonId) {
-    setPokemonList((currentList) =>
-      currentList.filter((pokemon) => pokemon.id !== pokemonId),
-    );
+  function removePokemon(id) {
+    updateCollection(pokemonList.filter((pokemon) => pokemon.id !== id));
   }
-
   return {
-    pokemonList,
+    pokemonList: visibleList,
     filteredPokemon,
     search,
     setSearch,
     addPokemon,
     removePokemon,
+    storageMessage: hydrated ? storageMessage : "",
   };
 }

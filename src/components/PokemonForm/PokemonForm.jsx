@@ -1,175 +1,192 @@
 import { useState } from "react";
 import { fetchPokemonByNumber } from "../../services/pokeApi.js";
+import { useHydrated } from "../../hooks/useHydrated.js";
+const emptyForm = { name: "", number: "", image: "", type1: "", type2: "" };
 
-const emptyForm = {
-  name: "",
-  number: "",
-  image: "",
-  type1: "",
-  type2: "",
-};
-
-function PokemonForm({ onSubmitPokemon, feedback, onFeedbackChange }) {
+export default function PokemonForm({
+  onSubmitPokemon,
+  feedback,
+  onFeedbackChange,
+}) {
+  const hydrated = useHydrated();
   const [formData, setFormData] = useState(emptyForm);
-  const [isFetchingPokemon, setIsFetchingPokemon] = useState(false);
-
+  const [isFetching, setIsFetching] = useState(false);
   function handleChange(event) {
     const { name, value } = event.target;
-
-    if (name === "number") {
-      onFeedbackChange({ type: "", message: "" });
-    }
-
-    setFormData((currentData) => ({
-      ...currentData,
-      [name]: value,
-    }));
+    onFeedbackChange({ type: "", message: "" });
+    setFormData((current) => ({ ...current, [name]: value }));
   }
-
   async function handleAutoFill() {
     const number = Number(formData.number);
-
-    if (!number) {
+    if (!Number.isSafeInteger(number) || number < 1) {
       onFeedbackChange({
         type: "error",
-        message: "Digite um número da Pokédex para buscar.",
+        message: "Digite um número inteiro maior que zero para buscar.",
       });
+      document.getElementById("dex-number").focus();
       return;
     }
-
-    setIsFetchingPokemon(true);
-    onFeedbackChange({ type: "", message: "" });
-
+    setIsFetching(true);
+    onFeedbackChange({
+      type: "info",
+      message: "Buscando os dados na PokeAPI…",
+    });
     try {
-      const pokemonData = await fetchPokemonByNumber(number);
-
-      setFormData((currentData) => ({
-        ...currentData,
-        name: pokemonData.name,
-        image: pokemonData.image ?? currentData.image,
-        type1: pokemonData.types[0] ?? "",
-        type2: pokemonData.types[1] ?? "",
+      const data = await fetchPokemonByNumber(number);
+      setFormData((current) => ({
+        ...current,
+        name: data.name,
+        image: data.image ?? "",
+        type1: data.types[0] ?? "",
+        type2: data.types[1] ?? "",
       }));
-    } catch {
+      onFeedbackChange({
+        type: "success",
+        message: "Dados preenchidos. Confira e registre sua captura.",
+      });
+    } catch (error) {
       onFeedbackChange({
         type: "error",
-        message: "Não foi possível buscar esse Pokémon agora.",
+        message:
+          error.message === "Pokémon não encontrado."
+            ? "Pokémon não encontrado. Confira o número ou preencha manualmente."
+            : "Não foi possível acessar a PokeAPI. Tente novamente ou preencha manualmente.",
       });
     } finally {
-      setIsFetchingPokemon(false);
+      setIsFetching(false);
     }
   }
-
   function handleSubmit(event) {
     event.preventDefault();
-
     const name = formData.name.trim();
-    const image = formData.image.trim();
     const number = Number(formData.number);
-    const primaryType = formData.type1.trim();
-    const secondaryType = formData.type2.trim();
-
-    if (!name || !image || !primaryType || !number) {
+    const image = formData.image.trim();
+    const types = [
+      ...new Set(
+        [formData.type1.trim(), formData.type2.trim()].filter(Boolean),
+      ),
+    ];
+    if (!name || !types.length || !Number.isSafeInteger(number) || number < 1) {
+      onFeedbackChange({
+        type: "error",
+        message: "Confira o nome, o número e o tipo principal.",
+      });
       return;
     }
-
-    const hasAdded = onSubmitPokemon({
-      name,
-      number,
-      image,
-      types: [primaryType, secondaryType].filter(Boolean),
-    });
-
-    if (hasAdded) {
+    if (!image.startsWith("https://")) {
+      onFeedbackChange({
+        type: "error",
+        message: "Use uma URL de imagem que comece com https://.",
+      });
+      document.getElementById("pokemon-image").focus();
+      return;
+    }
+    if (onSubmitPokemon({ name, number, image, types })) {
       setFormData(emptyForm);
+      document.getElementById("dex-number").focus();
     }
   }
-
   return (
-    <form className="capture-form" onSubmit={handleSubmit}>
-      <label>
-        Número da Pokédex
-        <div className="number-row">
-          <input
-            type="number"
-            name="number"
-            min="1"
-            placeholder="Ex: 1"
-            value={formData.number}
-            onChange={handleChange}
-            required
-          />
-          <button
-            type="button"
-            className="secondary-button"
-            onClick={handleAutoFill}
-            disabled={isFetchingPokemon}
-          >
-            {isFetchingPokemon ? "Buscando..." : "Auto preencher"}
-          </button>
+    <form
+      className="capture-form"
+      onSubmit={handleSubmit}
+      aria-label="Registrar captura"
+      aria-busy={isFetching}
+    >
+      <fieldset disabled={isFetching || !hydrated}>
+        <legend className="visually-hidden">Dados da captura</legend>
+        <div>
+          <label htmlFor="dex-number">Número da Pokédex</label>
+          <div className="number-row">
+            <input
+              id="dex-number"
+              type="number"
+              name="number"
+              min="1"
+              step="1"
+              placeholder="Ex.: 1"
+              value={formData.number}
+              onChange={handleChange}
+              required
+            />
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={handleAutoFill}
+            >
+              {isFetching ? "Buscando…" : "Preencher"}
+            </button>
+          </div>
         </div>
-      </label>
-
-      {feedback.message ? (
-        <p className={`form-message form-message--${feedback.type || "info"}`}>
-          {feedback.message}
-        </p>
-      ) : null}
-
-      <label>
-        Nome
-        <input
-          type="text"
-          name="name"
-          placeholder="Ex: Bulbasaur"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      </label>
-
-      <label>
-        URL da imagem
-        <input
-          type="url"
-          name="image"
-          placeholder="https://..."
-          value={formData.image}
-          onChange={handleChange}
-          required
-        />
-      </label>
-
-      <div className="type-grid">
         <label>
-          Tipo principal
+          Nome
           <input
             type="text"
-            name="type1"
-            placeholder="Ex: Grass"
-            value={formData.type1}
+            name="name"
+            autoComplete="off"
+            placeholder="Ex.: Bulbasaur"
+            value={formData.name}
+            onChange={handleChange}
+            maxLength="80"
+            required
+          />
+        </label>
+        <label htmlFor="pokemon-image">
+          URL da imagem
+          <input
+            id="pokemon-image"
+            type="url"
+            name="image"
+            autoComplete="off"
+            placeholder="https://…"
+            aria-describedby="image-hint"
+            value={formData.image}
             onChange={handleChange}
             required
           />
         </label>
-
-        <label>
-          Tipo secundário
-          <input
-            type="text"
-            name="type2"
-            placeholder="Ex: Poison"
-            value={formData.type2}
-            onChange={handleChange}
-          />
-        </label>
-      </div>
-
-      <button type="submit" className="primary-button">
-        Registrar captura
-      </button>
+        <p id="image-hint" className="form-hint">
+          Use uma imagem HTTPS. A busca preenche este campo para você.
+        </p>
+        <div className="type-grid">
+          <label>
+            Tipo principal
+            <input
+              type="text"
+              name="type1"
+              placeholder="Ex.: Grass"
+              value={formData.type1}
+              onChange={handleChange}
+              maxLength="30"
+              required
+            />
+          </label>
+          <label>
+            <span>
+              Tipo secundário <span className="optional">(opcional)</span>
+            </span>
+            <input
+              type="text"
+              name="type2"
+              placeholder="Ex.: Poison"
+              value={formData.type2}
+              onChange={handleChange}
+              maxLength="30"
+            />
+          </label>
+        </div>
+        <button type="submit" className="primary-button">
+          Registrar captura
+        </button>
+      </fieldset>
+      <p
+        className={`form-message form-message--${feedback.type || "info"}`}
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {feedback.message}
+      </p>
     </form>
   );
 }
-
-export default PokemonForm;
