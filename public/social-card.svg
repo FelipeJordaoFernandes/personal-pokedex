@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#202824"/>
+  <path d="M70 125h1060M70 550h1060" stroke="#43544a"/>
+  <g font-family="Arial, sans-serif">
+    <text x="70" y="85" font-size="26" font-weight="bold" fill="#edf3ed">Personal Pokédex</text>
+    <text x="70" y="235" font-size="18" letter-spacing="4" fill="#76b98d">SEU DIÁRIO DE CAPTURAS</text>
+    <text x="65" y="335" font-size="78" font-weight="bold" letter-spacing="-4" fill="#edf3ed">Sua jornada.</text>
+    <text x="65" y="425" font-size="78" font-weight="bold" letter-spacing="-4" fill="#76b98d">Sua Pokédex.</text>
+    <text x="70" y="590" font-size="20" fill="#b4c1b8">Uma captura de cada vez.</text>
+  </g>
+  <g transform="translate(925 325)" fill="none" stroke="#76b98d" stroke-width="8">
+    <circle r="130"/><path d="M-130 0h86m88 0h86"/><circle r="44"/><circle r="14" fill="#76b98d" stroke="none"/>
+    <path d="M-76-53c20-25 47-39 76-39" stroke-linecap="round"/>
+  </g>
+</svg>

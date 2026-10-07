@@ -1,0 +1,397 @@
+{
+  "date": "2026-10-07",
+  "baseCommit": "0adf9dff79716f7bf03ae2a305159bf46f01ae36",
+  "branch": "Ada/identidade-visual-qualidade",
+  "url": "http://127.0.0.1:4175/",
+  "lighthouse": {
+    "version": "13.5.0",
+    "method": "Coleção vazia, cache de rede limpo, perfil descartável; três medições por perfil/tema",
+    "baseline": [
+      {
+        "mode": "mobile",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 83
+        }
+      },
+      {
+        "mode": "desktop",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 83
+        }
+      }
+    ],
+    "medians": [
+      {
+        "mode": "mobile",
+        "theme": "light",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "performanceRange": [
+          99,
+          100
+        ]
+      },
+      {
+        "mode": "mobile",
+        "theme": "dark",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "performanceRange": [
+          99,
+          100
+        ]
+      },
+      {
+        "mode": "desktop",
+        "theme": "light",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "performanceRange": [
+          100,
+          100
+        ]
+      },
+      {
+        "mode": "desktop",
+        "theme": "dark",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "performanceRange": [
+          100,
+          100
+        ]
+      }
+    ],
+    "runs": [
+      {
+        "mode": "mobile",
+        "theme": "light",
+        "run": 1,
+        "checkedAt": "2026-10-07T22:26:26.253Z",
+        "scores": {
+          "performance": 99,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "first-contentful-paint": 1215.6099,
+          "largest-contentful-paint": 1832.6099,
+          "total-blocking-time": 0,
+          "cumulative-layout-shift": 0
+        }
+      },
+      {
+        "mode": "mobile",
+        "theme": "light",
+        "run": 2,
+        "checkedAt": "2026-10-07T22:26:33.324Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "first-contentful-paint": 1214.6467,
+          "largest-contentful-paint": 1683.6467,
+          "total-blocking-time": 0,
+          "cumulative-layout-shift": 0
+        }
+      },
+      {
+        "mode": "mobile",
+        "theme": "light",
+        "run": 3,
+        "checkedAt": "2026-10-07T22:26:40.262Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "first-contentful-paint": 1215.6661,
+          "largest-contentful-paint": 1682.6661,
+          "total-blocking-time": 0,
+          "cumulative-layout-shift": 0
+        }
+      },
+      {
+        "mode": "mobile",
+        "theme": "dark",
+        "run": 1,
+        "checkedAt": "2026-10-07T22:26:47.150Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "first-contentful-paint": 1214.6473,
+          "largest-contentful-paint": 1681.6473,
+          "total-blocking-time": 0,
+          "cumulative-layout-shift": 0
+        }
+      },
+      {
+        "mode": "mobile",
+        "theme": "dark",
+        "run": 2,
+        "checkedAt": "2026-10-07T22:26:54.112Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "first-contentful-paint": 1216.5542,
+          "largest-contentful-paint": 1686.0542,
+          "total-blocking-time": 0,
+          "cumulative-layout-shift": 0
+        }
+      },
+      {
+        "mode": "mobile",
+        "theme": "dark",
+        "run": 3,
+        "checkedAt": "2026-10-07T22:27:00.959Z",
+        "scores": {
+          "performance": 99,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "first-contentful-paint": 1215.6796,
+          "largest-contentful-paint": 1835.6796,
+          "total-blocking-time": 0,
+          "cumulative-layout-shift": 0
+        }
+      },
+      {
+        "mode": "desktop",
+        "theme": "light",
+        "run": 1,
+        "checkedAt": "2026-10-07T22:27:07.944Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "first-contentful-paint": 334.4077,
+          "largest-contentful-paint": 414.4077,
+          "total-blocking-time": 0,
+          "cumulative-layout-shift": 0
+        }
+      },
+      {
+        "mode": "desktop",
+        "theme": "light",
+        "run": 2,
+        "checkedAt": "2026-10-07T22:27:14.855Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "first-contentful-paint": 332.3947,
+          "largest-contentful-paint": 412.3947,
+          "total-blocking-time": 0,
+          "cumulative-layout-shift": 0
+        }
+      },
+      {
+        "mode": "desktop",
+        "theme": "light",
+        "run": 3,
+        "checkedAt": "2026-10-07T22:27:21.821Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "first-contentful-paint": 333.4331,
+          "largest-contentful-paint": 413.4331,
+          "total-blocking-time": 0,
+          "cumulative-layout-shift": 0
+        }
+      },
+      {
+        "mode": "desktop",
+        "theme": "dark",
+        "run": 1,
+        "checkedAt": "2026-10-07T22:27:28.725Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "first-contentful-paint": 331.8542,
+          "largest-contentful-paint": 411.8542,
+          "total-blocking-time": 0,
+          "cumulative-layout-shift": 0.00002938534278959811
+        }
+      },
+      {
+        "mode": "desktop",
+        "theme": "dark",
+        "run": 2,
+        "checkedAt": "2026-10-07T22:27:35.625Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "first-contentful-paint": 332.5304,
+          "largest-contentful-paint": 412.5304,
+          "total-blocking-time": 0,
+          "cumulative-layout-shift": 0.00002938534278959811
+        }
+      },
+      {
+        "mode": "desktop",
+        "theme": "dark",
+        "run": 3,
+        "checkedAt": "2026-10-07T22:27:42.557Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "first-contentful-paint": 332.5895,
+          "largest-contentful-paint": 412.5895,
+          "total-blocking-time": 0,
+          "cumulative-layout-shift": 0.00002938534278959811
+        }
+      }
+    ]
+  },
+  "axe": {
+    "checks": 25,
+    "violations": 0,
+    "incomplete": 0,
+    "widths": [
+      320,
+      390,
+      768,
+      1024,
+      1440
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "flowsPassed": true,
+    "browserErrors": []
+  },
+  "live": {
+    "api": [
+      {
+        "url": "https://pokeapi.co/api/v2/pokemon/1",
+        "status": 200
+      },
+      {
+        "url": "https://pokeapi.co/api/v2/pokemon/4",
+        "status": 200
+      },
+      {
+        "url": "https://pokeapi.co/api/v2/pokemon/7",
+        "status": 200
+      },
+      {
+        "url": "https://pokeapi.co/api/v2/pokemon/25",
+        "status": 200
+      },
+      {
+        "url": "https://pokeapi.co/api/v2/pokemon/94",
+        "status": 200
+      },
+      {
+        "url": "https://pokeapi.co/api/v2/pokemon/133",
+        "status": 200
+      },
+      {
+        "url": "https://pokeapi.co/api/v2/pokemon/999999",
+        "status": 404
+      }
+    ],
+    "artworks": 6,
+    "passed": true,
+    "errors": []
+  },
+  "assets": [
+    {
+      "path": "dist/index.html",
+      "sha256": "097aca3249108d0b332805199f044b9bc598445f2f9e20262c49651ea1c0a610"
+    },
+    {
+      "path": "dist/assets/index-B_j6MM56.css",
+      "sha256": "3df82f1346a89574c8697acbe485ef37bdf068d3c311fb1f51a5b646064a1811"
+    },
+    {
+      "path": "dist/assets/index-TlB2AFs_.js",
+      "sha256": "ff5ec30335eb5138aef958ee090fcaa45a666ce4176b5c07bd8137eb69050068"
+    },
+    {
+      "path": "dist/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+      "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+    },
+    {
+      "path": "dist/assets/plus-jakarta-sans-latin-wght-normal-eXO_dkmS.woff2",
+      "sha256": "153fc85b70298beeb1d61a5f723331649e7f23bb77302a66e61cb3e2fbdb5e79"
+    },
+    {
+      "path": "public/favicon.svg",
+      "sha256": "531a172ebdf42784fdfa0e387b6a045a0b7917352b16a8bef0cd275df74048f3"
+    },
+    {
+      "path": "public/favicon-32.png",
+      "sha256": "d698245758598fb825d60c17f005802cc860b1b90934526a9f75ed2d9e573c18"
+    },
+    {
+      "path": "public/apple-touch-icon.png",
+      "sha256": "939e6e7d25a3feb79f9a99a4bb9db0766102b9e8e6c414d51c852c52c010b56c"
+    },
+    {
+      "path": "public/social-card.png",
+      "sha256": "3e7eea59516da0232b5bf1a7a2e9762ede3a42965ac07da4692a94cda4730bc3"
+    }
+  ]
+}
