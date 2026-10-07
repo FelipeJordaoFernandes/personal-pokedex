@@ -4,7 +4,7 @@ Uma coleção pessoal de Pokémon capturados, feita com React, JavaScript e Vite
 
 [Aplicação em produção](https://personal-pokedex.vercel.app/) · [Repositório](https://github.com/FelipeJordaoFernandes/personal-pokedex)
 
-As mudanças de identidade e qualidade desta etapa seguem por PR; a URL de produção só recebe essa versão após aprovação e merge.
+A produção acompanha a branch `main`; branches de trabalho geram prévias independentes na Vercel.
 
 ## Funcionalidades
 
