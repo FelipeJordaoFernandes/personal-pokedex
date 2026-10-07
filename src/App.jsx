@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header/Header.jsx";
 import BrandMark from "./components/BrandMark.jsx";
+import SectionLink from "./components/SectionLink.jsx";
 import PokemonForm from "./components/PokemonForm/PokemonForm.jsx";
 import SearchBar from "./components/SearchBar/SearchBar.jsx";
 import PokemonCard from "./components/PokemonCard/PokemonCard.jsx";
@@ -37,9 +38,9 @@ export default function App() {
   }
   return (
     <div className="app-shell">
-      <a className="skip-link" href="#collection-title">
+      <SectionLink className="skip-link" targetId="collection-title">
         Pular para a coleção
-      </a>
+      </SectionLink>
       <Header />
       <main id="main-content">
         <section className="hero" aria-labelledby="page-title">
@@ -54,7 +55,7 @@ export default function App() {
               Cada Pokémon tem uma história. Guarde suas capturas e reúna seus
               favoritos em um só lugar.
             </p>
-            <a className="collection-jump" href="#collection-title">
+            <SectionLink className="collection-jump" targetId="collection-title">
               Explorar minha coleção{" "}
               <svg
                 width="16"
@@ -67,7 +68,7 @@ export default function App() {
               >
                 <path d="M12 4v16m-6-6 6 6 6-6" />
               </svg>
-            </a>
+            </SectionLink>
           </div>
           <div className="hero-stats">
             <BrandMark />
