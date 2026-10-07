@@ -1,5 +1,30 @@
 # Revisão de identidade e qualidade — 2026-10-07
 
+## Complemento: URL limpa e recarregamento no topo — 2026-10-07
+
+Correção na branch `Ada/navegacao-url-limpa`, sobre `12c920c`. Reproduzido no build anterior: clicar em “Explorar minha coleção” acrescentava `#collection-title`; recarregar em 390 × 844 mantinha a rolagem em 1.032 px, com restauração automática do navegador.
+
+Os atalhos de coleção agora movem foco e rolagem sem alterar a URL nem acrescentar entradas ao histórico. A inicialização no HTML, antes de interpretar as seções, remove fragmentos antigos/vazios com `replaceState`, preserva caminho/query/estado e configura restauração manual. A entrada/recarregamento e o retorno à página por `pageshow` começam no topo, com rolagem imediata mesmo quando o CSS usa movimento suave. Fragmentos adicionados posteriormente também são limpos. Links mantêm seu destino HTML como fallback sem JavaScript e preservam cliques modificados; a nova aba limpa o fragmento na inicialização.
+
+`audit:navigation` aprovado em Edge e Chrome, 320/390/768/1024/1440 px, ambos os temas e coleção isolada de 24 cards: entrada com fragmento antigo/vazio, atalho por Tab/Enter, clique em explorar, Ctrl+clique/nova aba, ausência de hash, preservação de query/history e reload da seção/fim com `scrollY = 0`. Coleção, tema e metadados mantidos; nenhum erro JS ou transbordamento horizontal. Movimento normal e reduzido cobertos. Lint, cinco testes, build e diff aprovados; `audit:ui` reexecutado com 25 verificações axe sem violações/incompletos e fluxos preservados. Lighthouse/API real não repetidos nesta correção. Evidências locais regeneráveis em `artifacts/navigation` e `artifacts/ui`; Firefox, Safari e leitores de tela reais não foram auditados.
+
+## Complemento: resposta do seletor de tema — 2026-10-07
+
+Correção na branch `Ada/toggle-icons-instantaneo`, sobre `ea1dee9`. Antes, um único `<img>` trocava de `src` ao clicar, e o estado do tema em `App` fazia a coleção inteira renderizar novamente. Agora Solrock e Lunatone ficam montados, carregados e com decodificação antecipada. CSS seleciona o ícone pelo mesmo `data-theme` da paleta, atualizado no próprio handler do clique. O estado React pertence somente ao toggle; persistência e rótulo acessível continuam funcionando.
+
+Medição comparativa no build de produção local, Edge headless, viewport 1440 × 1000 e CPU desacelerada 6×. Contextos isolados com 6 ou 300 cards fictícios, imagens locais e seis alternâncias por tema inicial (12 amostras por tamanho e versão). O intervalo medido é do clique programático ao primeiro callback `requestAnimationFrame`, com conferência do tema e das imagens carregadas; não é INP nem medição do pixel apresentado na tela.
+
+| Coleção | Mediana anterior | Mediana corrigida | Máximo anterior | Máximo corrigido |
+| --- | --- | --- | --- | --- |
+| 6 cards | 7,2 ms | 2,7 ms | 13,0 ms | 67,3 ms |
+| 300 cards | 21,1 ms | 2,7 ms | 36,5 ms | 6,0 ms |
+
+Ambos os ícones já carregados em todas as amostras corrigidas; zero alterações de `src`, contra uma por clique antes. O atraso considerável relatado não foi reproduzido localmente. A mediana caiu, mas houve uma amostra de 67,3 ms com seis cards: escalonamento do navegador/sistema e pintura ainda variam, portanto não se garante latência máxima em outros dispositivos. Dados completos em [toggle-summary.json](toggle-summary.json).
+
+Validação desta correção: lint, cinco testes, build e diff aprovados; `audit:toggle` cobriu 320/390/768/1024/1440 px, ambos os temas, Enter/Espaço, dez cliques no mesmo evento, persistência após reload, armazenamento bloqueado e nenhuma requisição de imagem ao alternar. `audit:ui` foi reexecutado: 25 verificações axe sem violações ou itens incompletos, fluxos preservados e nenhum erro JS. Inspeção visual dos ícones em mobile escuro e desktop claro aprovada. Lighthouse e integração real com PokeAPI não foram repetidos nesta correção; resultados abaixo pertencem à revisão anterior.
+
+## Revisão anterior
+
 Revisão na branch `Ada/identidade-visual-qualidade`, a partir de `main` em `0adf9dff79716f7bf03ae2a305159bf46f01ae36`. A identidade foi aplicada conforme o guia pessoal consultado no Obsidian e a paleta conferida no código do portfólio. Valores do tema claro são adaptações locais. Inter e Plus Jakarta Sans são uma experiência tipográfica deste projeto, sem aprovação como padrão global.
 
 ## O que mudou

@@ -76,6 +76,20 @@
     />
     <script>
       (() => {
+        // Run before the page is parsed so old fragments cannot scroll to a section.
+        history.scrollRestoration = "manual";
+        const cleanFragment = () => {
+          if (location.href.includes("#"))
+            history.replaceState(history.state, "", location.pathname + location.search);
+        };
+        const startAtTop = () => {
+          cleanFragment();
+          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        };
+        startAtTop();
+        window.addEventListener("pageshow", startAtTop);
+        window.addEventListener("hashchange", cleanFragment);
+
         let theme;
         try {
           theme = localStorage.getItem("pokedex-go-theme");

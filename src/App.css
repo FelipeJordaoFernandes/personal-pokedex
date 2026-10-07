@@ -39,11 +39,27 @@
   background: var(--surface);
   font-size: 0.875rem;
 }
+.theme-toggle-icons {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 28px;
+  height: 28px;
+}
 .theme-toggle-image {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 28px;
   height: 28px;
   object-fit: contain;
+}
+.theme-toggle-dark,
+:root[data-theme="dark"] .theme-toggle-light {
+  visibility: hidden;
+}
+:root[data-theme="dark"] .theme-toggle-dark {
+  visibility: visible;
 }
 .hero {
   display: grid;
@@ -474,7 +490,7 @@ input::placeholder {
   .theme-toggle {
     padding: 7px;
   }
-  .theme-toggle span {
+  .theme-toggle-label {
     display: none;
   }
   .hero {

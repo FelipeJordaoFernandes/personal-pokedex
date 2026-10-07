@@ -4,7 +4,7 @@ Uma coleção pessoal de Pokémon capturados, feita com React, JavaScript e Vite
 
 [Aplicação em produção](https://personal-pokedex.vercel.app/) · [Repositório](https://github.com/FelipeJordaoFernandes/personal-pokedex)
 
-As mudanças de identidade e qualidade desta etapa seguem por PR; a URL de produção só recebe essa versão após aprovação e merge.
+A produção acompanha a branch `main`; branches de trabalho geram prévias independentes na Vercel.
 
 ## Funcionalidades
 
@@ -14,6 +14,8 @@ As mudanças de identidade e qualidade desta etapa seguem por PR; a URL de produ
 - Bloqueio de números duplicados e remoção de capturas.
 - Coleção e preferência de tema salvas no `localStorage` deste navegador.
 - Preferência de tema do sistema na primeira visita; tema aplicado antes da renderização.
+- Solrock e Lunatone carregados e preparados juntos; o seletor troca o ícone e a paleta no clique, sem renderizar novamente a coleção.
+- Navegação interna com foco acessível e URL sem fragmentos; abrir/recarregar a página começa no topo, preservando coleção e tema salvos.
 - Tratamento de falha da API, imagem indisponível e armazenamento bloqueado ou inválido.
 - Layout para celular, tablet e desktop; navegação por teclado, foco visível, atalhos para a coleção e mensagens anunciadas por leitores de tela.
 - HTML público pré-renderizado no build, metadados sociais, favicon verde, canonical, robots e sitemap.
@@ -51,11 +53,15 @@ Com a prévia de produção em execução, em outro terminal:
 
 ```bash
 npm run audit:ui
+npm run audit:toggle
+npm run audit:navigation
 npm run audit:lighthouse
 npm run audit:live
 ```
 
 - `audit:ui`: Playwright + axe, cinco larguras (320, 390, 768, 1024 e 1440 px), ambos os temas, coleção vazia/preenchida, erros, busca, teclado, reload, texto ampliado e falhas de armazenamento. Usa dados fictícios e uma API simulada em contextos isolados.
+- `audit:toggle`: alternância por clique/teclado, dez cliques rápidos, ícones preparados sem trocar `src` nem solicitar imagens ao alternar, persistência, cinco larguras e armazenamento bloqueado.
+- `audit:navigation`: entrada com fragmento antigo/vazio, atalhos por clique/teclado, URL limpa, query/history preservados, Ctrl+clique em nova aba e reload no topo com coleção e tema intactos; cinco larguras e ambos os temas.
 - `audit:lighthouse`: três medições por perfil mobile/desktop e por tema, em perfis descartáveis, coleção vazia e cache de rede limpo. Salva relatórios HTML/JSON e o resumo em `artifacts/lighthouse`.
 - `audit:live`: integração real com PokeAPI e artworks, seis cadastros, número inexistente e falha de conexão simulada. Requer internet e gera capturas de tela em `artifacts/live`.
 

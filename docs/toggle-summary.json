@@ -1,0 +1,234 @@
+{
+  "date": "2026-10-07",
+  "baseCommit": "ea1dee9a893b99a649d5b2f97ef2e20a21b7cdc6",
+  "environment": {
+    "browser": "Microsoft Edge headless",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "cpuSlowdown": 6
+  },
+  "measurement": "Programmatic click to first requestAnimationFrame callback; theme and image readiness checked. Not INP or screen presentation time.",
+  "limitations": "Reported considerable delay not reproduced locally. One optimized six-card sample reached 67.3 ms; no universal latency guarantee.",
+  "baseline": {
+    "phase": "baseline",
+    "groups": [
+      {
+        "count": 6,
+        "initialTheme": "light",
+        "firstFrameTimesMs": [
+          13,
+          7.8,
+          7.2,
+          4.9,
+          4.9,
+          4.8
+        ],
+        "initialImages": 1,
+        "allInitialImagesLoaded": true,
+        "sourceMutations": 6,
+        "correctThemeAndImagesAtFirstFrame": true
+      },
+      {
+        "count": 6,
+        "initialTheme": "dark",
+        "firstFrameTimesMs": [
+          10.6,
+          7.9,
+          7.5,
+          4.5,
+          4.8,
+          4.1
+        ],
+        "initialImages": 1,
+        "allInitialImagesLoaded": true,
+        "sourceMutations": 6,
+        "correctThemeAndImagesAtFirstFrame": true
+      },
+      {
+        "count": 300,
+        "initialTheme": "light",
+        "firstFrameTimesMs": [
+          36.5,
+          23.6,
+          20,
+          21.5,
+          20,
+          20.5
+        ],
+        "initialImages": 1,
+        "allInitialImagesLoaded": true,
+        "sourceMutations": 6,
+        "correctThemeAndImagesAtFirstFrame": true
+      },
+      {
+        "count": 300,
+        "initialTheme": "dark",
+        "firstFrameTimesMs": [
+          30.9,
+          21.1,
+          19.4,
+          19.7,
+          19.7,
+          22.8
+        ],
+        "initialImages": 1,
+        "allInitialImagesLoaded": true,
+        "sourceMutations": 6,
+        "correctThemeAndImagesAtFirstFrame": true
+      }
+    ]
+  },
+  "optimized": {
+    "phase": "optimized",
+    "groups": [
+      {
+        "count": 6,
+        "initialTheme": "light",
+        "firstFrameTimesMs": [
+          13.7,
+          67.3,
+          2.9,
+          2.3,
+          1.6,
+          2.3
+        ],
+        "initialImages": 2,
+        "allInitialImagesLoaded": true,
+        "sourceMutations": 0,
+        "correctThemeAndImagesAtFirstFrame": true
+      },
+      {
+        "count": 6,
+        "initialTheme": "dark",
+        "firstFrameTimesMs": [
+          13.1,
+          4,
+          2.6,
+          2.7,
+          2.1,
+          2.3
+        ],
+        "initialImages": 2,
+        "allInitialImagesLoaded": true,
+        "sourceMutations": 0,
+        "correctThemeAndImagesAtFirstFrame": true
+      },
+      {
+        "count": 300,
+        "initialTheme": "light",
+        "firstFrameTimesMs": [
+          6,
+          2.2,
+          2.7,
+          3,
+          1.8,
+          2.3
+        ],
+        "initialImages": 2,
+        "allInitialImagesLoaded": true,
+        "sourceMutations": 0,
+        "correctThemeAndImagesAtFirstFrame": true
+      },
+      {
+        "count": 300,
+        "initialTheme": "dark",
+        "firstFrameTimesMs": [
+          5.5,
+          2.7,
+          2.8,
+          2.1,
+          2.1,
+          2.5
+        ],
+        "initialImages": 2,
+        "allInitialImagesLoaded": true,
+        "sourceMutations": 0,
+        "correctThemeAndImagesAtFirstFrame": true
+      }
+    ]
+  },
+  "regression": {
+    "base": "http://127.0.0.1:4177/",
+    "results": [
+      {
+        "width": 320,
+        "systemTheme": "light",
+        "persistedTheme": "dark",
+        "passed": true
+      },
+      {
+        "width": 320,
+        "systemTheme": "dark",
+        "persistedTheme": "light",
+        "passed": true
+      },
+      {
+        "width": 390,
+        "systemTheme": "light",
+        "persistedTheme": "dark",
+        "passed": true
+      },
+      {
+        "width": 390,
+        "systemTheme": "dark",
+        "persistedTheme": "light",
+        "passed": true
+      },
+      {
+        "width": 768,
+        "systemTheme": "light",
+        "persistedTheme": "dark",
+        "passed": true
+      },
+      {
+        "width": 768,
+        "systemTheme": "dark",
+        "persistedTheme": "light",
+        "passed": true
+      },
+      {
+        "width": 1024,
+        "systemTheme": "light",
+        "persistedTheme": "dark",
+        "passed": true
+      },
+      {
+        "width": 1024,
+        "systemTheme": "dark",
+        "persistedTheme": "light",
+        "passed": true
+      },
+      {
+        "width": 1440,
+        "systemTheme": "light",
+        "persistedTheme": "dark",
+        "passed": true
+      },
+      {
+        "width": 1440,
+        "systemTheme": "dark",
+        "persistedTheme": "light",
+        "passed": true
+      }
+    ],
+    "storageBlocked": true,
+    "errors": []
+  },
+  "ui": {
+    "checks": 25,
+    "violations": 0,
+    "incomplete": 0,
+    "flowsPassed": true,
+    "errors": []
+  },
+  "checks": {
+    "lint": true,
+    "nodeTests": 5,
+    "build": true,
+    "diff": true,
+    "lighthouseRerun": false,
+    "livePokeApiRerun": false
+  }
+}
